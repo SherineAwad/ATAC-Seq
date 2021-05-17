@@ -1,0 +1,14 @@
+REPLICATE1_NAME: 'replicate1' 
+REPLICATE2_NAME: 'replicate2' 
+REPLICATE1: ['SLX-19014.ATACAd001.HYTFKDRXX']
+REPLICATE2: ['SLX-19014.ATACAd001.HYTFKDRXX']
+
+WORKDIR: '/rds/project/yhbl2/rds-yhbl2-genehunter/SM/ATAC-Seq'
+CHR : 'chrM'
+GENOME: "/rds/project/yhbl2/rds-yhbl2-genehunter/SM/annotations/Mus_musculus/Ensembl/GRCm38/Sequence/Bowtie2Index/genome"
+INDEX: "/rds/project/yhbl2/rds-yhbl2-genehunter/SM/annotations/Mus_musculus/Ensembl/GRCm38/Sequence/Bowtie2Index/genome"
+
+
+LEN : 50
+QV: 0.01
+AUC: 500
