@@ -3,7 +3,7 @@ Author: Sherine Awad
 A snakefile pipeline for ATAC-Seq.
 
 Change the config.yaml file appropriately according to your data. 
-Update sample names, paramters of Genrich in the config file. Also, change workdir where the samples exist, reference genome,  etc. 
+Update sample names, parameters of Genrich in the config file. Also, change workdir where the samples exist, reference genome,  etc. 
 
 Then run: snakemake -jnumber_of_cores, for example for 5 cores use:
 
