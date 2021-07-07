@@ -18,4 +18,7 @@ and to print the commands in a dry run use:
 
     snakemake -j1 -n -p 
 
+For the sake eproducibility, use conda to pull same versions of tools. Snakemake and conda have to be installed in your system:
 
+ 
+   snakemake --cores --use-conda

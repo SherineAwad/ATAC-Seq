@@ -10,7 +10,6 @@ rule all:
         expand("{sample}.bam", sample = config['REPLICATE2']),
         expand("{sample}.sorted.bam", sample = config['REPLICATE2']), 
         expand("{replicate}.narrowPeak", replicate = config['REPLICATE1_NAME']) 
-
 rule trim: 
     input: 
        r1 = "{sample}.r_1.fq.gz",
@@ -18,6 +17,7 @@ rule trim:
     output: 
       val1 = "galore/{sample}.r_1_val_1.fq.gz",
       val2 = "galore/{sample}.r_2_val_2.fq.gz"
+    conda: 'env/env-trim.yaml'
     log: 
         "{sample}.trim.log"
     shell: 
@@ -33,6 +33,7 @@ rule tosam:
        genome = config['GENOME']
     output:
         "{sample}.sam"
+    conda: 'env/env-align.yaml'
     log: 
         "{sample}.sam.log"
     shell:
@@ -43,6 +44,7 @@ rule tobam:
           "{sample}.sam"
       output:
           "{sample}.bam"
+      conda: 'env/env-align.yaml'
       log: 
           "{sample}.bam.log"
       shell:
@@ -55,6 +57,7 @@ rule sort:
        "{sample}.sorted.bam" 
     params: 
         "{sample}.tmp.sorted"
+    conda: 'env/env-align.yaml'
     log: 
         "{sample}.sorted.log" 
     shell: 
@@ -62,11 +65,11 @@ rule sort:
 
 rule peak_call:
     input: 
-        expand("{sample}.sorted.bam", sample = config['REPLICATE1']), 
-        expand("{sample}.sorted.bam", sample = config['REPLICATE2'])
+        expand("{sample}.q40.sorted.bam", sample = config['REPLICATE1']), 
+        expand("{sample}.q40.sorted.bam", sample = config['REPLICATE2'])
     params:
-       lambda w: ",".join(expand("{sample}.sorted.bam", sample = config['REPLICATE1'])), 
-       lambda w: ",".join(expand("{sample}.sorted.bam", sample = config['REPLICATE2'])),
+       lambda w: ",".join(expand("{sample}.q40.sorted.bam", sample = config['REPLICATE1'])), 
+       lambda w: ",".join(expand("{sample}.q40.sorted.bam", sample = config['REPLICATE2'])),
        expand("{chr}", chr=config['CHR']),
        expand("{file}.bed", file = config['REPLICATE1_NAME']),
        expand("{file}.bed", file = config['REPLICATE2_NAME']),
@@ -76,6 +79,7 @@ rule peak_call:
     output: 
        expand("{replicate}.narrowPeak", replicate = config['REPLICATE1_NAME']), 
        expand("{replicate}.narrowPeak", replicate = config['REPLICATE2_NAME'])
+    conda: 'env/env-peakcall.yaml'
     shell:
        """
        Genrich -t {params[0]} -o {output[0]} -b {params[3]} -r -j -v -e {params[2]}  -q {params[5]} -a {params[6]} -l {params[7]}
