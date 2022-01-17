@@ -1,5 +1,4 @@
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6.0.2-brightgreen.svg)](https://snakemake.github.io)
-[![Documentation Status](https://readthedocs.org/projects/ribofilio/badge/)](http://dammit.readthedocs.io/en/latest)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 Author: Sherine Awad 
@@ -7,7 +6,8 @@ Author: Sherine Awad
 A snakefile pipeline for ATAC-Seq.
 
 Change the config.yaml file appropriately according to your data. 
-Update sample names, parameters of Genrich in the config file. Also, change workdir where the samples exist, reference genome,  etc. 
+Update replicat1.tsv and replicate2.tsv for Replicate 1 and Replicate 2 respectively. 
+Update parameters of Genrich in the config file. Also, change workdir where the samples exist, reference genome,  etc. 
 
 Then run: snakemake -jnumber_of_cores, for example for 5 cores use:
 
@@ -22,6 +22,6 @@ and to print the commands in a dry run use:
 
     snakemake -j1 -n -p 
 
-For the sake eproducibility, use conda to pull same versions of tools. Snakemake and conda have to be installed in your system:
+For the sake reproducibility, use conda to pull same versions of tools. Snakemake and conda have to be installed in your system:
 
     snakemake --cores --use-conda
