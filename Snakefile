@@ -1,15 +1,26 @@
 configfile: "config.yaml"
 workdir: config['WORKDIR']
 
+
+with open(config['REPLICATE1']) as fp:
+    REPLICATE1= fp.read().splitlines()
+with open(config['REPLICATE2']) as fp:
+    REPLICATE2 = fp.read().splitlines()
+
+print(REPLICATE1)
+print(REPLICATE2)
+
 rule all: 
     input:
-        expand("{sample}.sam", sample = config['REPLICATE1']), 
-        expand("{sample}.bam", sample = config['REPLICATE1']), 
-        expand("{sample}.sorted.bam", sample = config['REPLICATE1']),    
-        expand("{sample}.sam", sample = config['REPLICATE2']),
-        expand("{sample}.bam", sample = config['REPLICATE2']),
-        expand("{sample}.sorted.bam", sample = config['REPLICATE2']), 
-        expand("{replicate}.narrowPeak", replicate = config['REPLICATE1_NAME']) 
+        expand("{sample}.sam", sample = REPLICATE1), 
+        expand("{sample}.bam", sample = REPLICATE1), 
+        expand("{sample}.sorted.bam", sample = REPLICATE1),    
+        expand("{sample}.sam", sample = REPLICATE2),
+        expand("{sample}.bam", sample = REPLICATE2),
+        expand("{sample}.sorted.bam", sample = REPLICATE2), 
+        expand("{replicate}.narrowPeak", replicate = config['REPLICATE1_NAME']), 
+        expand("{replicate}.narrowPeak", replicate = config['REPLICATE2_NAME'])
+
 rule trim: 
     input: 
        r1 = "{sample}.r_1.fq.gz",
@@ -65,11 +76,11 @@ rule sort:
 
 rule peak_call:
     input: 
-        expand("{sample}.q40.sorted.bam", sample = config['REPLICATE1']), 
-        expand("{sample}.q40.sorted.bam", sample = config['REPLICATE2'])
+        expand("{sample}.sorted.bam", sample = REPLICATE1), 
+        expand("{sample}.sorted.bam", sample = REPLICATE2)
     params:
-       lambda w: ",".join(expand("{sample}.q40.sorted.bam", sample = config['REPLICATE1'])), 
-       lambda w: ",".join(expand("{sample}.q40.sorted.bam", sample = config['REPLICATE2'])),
+       lambda w: ",".join(expand("{sample}.sorted.bam", sample = REPLICATE1)), 
+       lambda w: ",".join(expand("{sample}.sorted.bam", sample = REPLICATE2)),
        expand("{chr}", chr=config['CHR']),
        expand("{file}.bed", file = config['REPLICATE1_NAME']),
        expand("{file}.bed", file = config['REPLICATE2_NAME']),
