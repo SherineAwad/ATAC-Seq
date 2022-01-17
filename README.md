@@ -6,7 +6,7 @@ Author: Sherine Awad
 A snakefile pipeline for ATAC-Seq.
 
 Change the config.yaml file appropriately according to your data. 
-Update replicat1.tsv and replicate2.tsv for Replicate 1 and Replicate 2 respectively. 
+Update replicate1.tsv and replicate2.tsv for Replicate 1 and Replicate 2 respectively. 
 Update parameters of Genrich in the config file. Also, change workdir where the samples exist, reference genome,  etc. 
 
 Then run: snakemake -jnumber_of_cores, for example for 5 cores use:
