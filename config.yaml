@@ -4,7 +4,7 @@ REPLICATE2_NAME: 'replicate2'
 REPLICATE1: "replicate1.tsv"
 REPLICATE2: "replicate2.tsv"
 
-WORKDIR: '/rds/project/yhbl2/rds-yhbl2-genehunter/SM/ATAC-Seq'
+PAIRED: TRUE #Use False for Single-end reads
 CHR : 'chrM'
 GENOME: "/rds/project/yhbl2/rds-yhbl2-genehunter/SM/annotations/Mus_musculus/Ensembl/GRCm38/Sequence/Bowtie2Index/genome"
 INDEX: "/rds/project/yhbl2/rds-yhbl2-genehunter/SM/annotations/Mus_musculus/Ensembl/GRCm38/Sequence/Bowtie2Index/genome"

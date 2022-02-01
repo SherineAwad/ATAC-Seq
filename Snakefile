@@ -1,6 +1,4 @@
 configfile: "config.yaml"
-workdir: config['WORKDIR']
-
 
 with open(config['REPLICATE1']) as fp:
     REPLICATE1= fp.read().splitlines()
@@ -21,34 +19,62 @@ rule all:
         expand("{replicate}.narrowPeak", replicate = config['REPLICATE1_NAME']), 
         expand("{replicate}.narrowPeak", replicate = config['REPLICATE2_NAME'])
 
-rule trim: 
-    input: 
-       r1 = "{sample}.r_1.fq.gz",
-       r2 = "{sample}.r_2.fq.gz"
-    output: 
-      val1 = "galore/{sample}.r_1_val_1.fq.gz",
-      val2 = "galore/{sample}.r_2_val_2.fq.gz"
-    conda: 'env/env-trim.yaml'
-    log: 
-        "{sample}.trim.log"
-    shell: 
+if config['PAIRED']:
+    rule trim: 
+       input: 
+          r1 = "{sample}.r_1.fq.gz",
+          r2 = "{sample}.r_2.fq.gz"
+       output: 
+          val1 = "galore/{sample}.r_1_val_1.fq.gz",
+          val2 = "galore/{sample}.r_2_val_2.fq.gz"
+       conda: 'env/env-trim.yaml'
+       log: 
+           "{sample}.trim.log"
+       shell: 
          """
          trim_galore --gzip --retain_unpaired --trim1 --fastqc --fastqc_args "--outdir fastqc" -o galore --paired {input.r1} {input.r2}
          """
 
-rule tosam:
-    input:
-        r1 = "galore/{sample}.r_1_val_1.fq.gz",
-        r2 = "galore/{sample}.r_2_val_2.fq.gz"
-    params:
-       genome = config['GENOME']
-    output:
-        "{sample}.sam"
-    conda: 'env/env-align.yaml'
-    log: 
-        "{sample}.sam.log"
-    shell:
-        "bowtie2 -x {params} -1 {input.r1} -2 {input.r2} -S {output}"
+    rule tosam:
+       input:
+          r1 = "galore/{sample}.r_1_val_1.fq.gz",
+          r2 = "galore/{sample}.r_2_val_2.fq.gz"
+       params:
+          genome = config['GENOME']
+       output:
+          "{sample}.sam"
+       conda: 'env/env-align.yaml'
+       log: 
+           "{sample}.sam.log"
+       shell:
+           "bowtie2 -x {params} -1 {input.r1} -2 {input.r2} -S {output}"
+else: 
+     rule trim:
+       input:
+           "{sample}.fq.gz",
+       output:
+           "galore/{sample}_trimmed.fq.gz",
+       conda: 'env/env-trim.yaml'
+       log:
+           "{sample}.trim.log"
+       shell:
+           """
+           mkdir -p galore
+           mkdir -p fastqc
+           trim_galore --gzip --retain_unpaired --trim1 --fastqc --fastqc_args "--outdir fastqc" -o galore {input}
+           """
+     rule tosam: 
+        input:
+           "galore/{sample}_trimmed.fq.gz"
+        params:
+           genome = config['GENOME']
+        conda: 'env/env-align.yaml'
+        log:
+           "{sample}.sam.log" 
+        output:
+           "{sample}.sam"
+        shell:
+           "bowtie2 -x {params.genome} -U {input} -S {output}"
 
 rule tobam:
       input:

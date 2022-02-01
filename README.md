@@ -5,17 +5,12 @@
 Snakemake Workflow for ATAC-Seq  
 =====================================
 
-Author: Sherine Awad 
-
 A snakefile pipeline for ATAC-Seq.
 
 Change the config.yaml file appropriately according to your data. 
-Update replicate1.tsv and replicate2.tsv for Replicate 1 and Replicate 2 respectively. 
-Update parameters of Genrich in the config file. Also, change workdir where the reference genome,  etc.
+Update replicate1.tsv and replicate2.tsv for Replicates 1 and Replicates 2 respectively. 
+Update parameters of Genrich in the config file. 
 
-You can use our Makefile to prepare the references: 
-
-`Prepare Reference <https://github.com/SherineAwad/BulkRNASeq/blob/master/Makefile>`
 
 Then run: snakemake -jnumber_of_cores, for example for 5 cores use:
 
@@ -29,6 +24,10 @@ and for a dry run use:
 and to print the commands in a dry run use:
 
     snakemake -j1 -n -p 
+
+To use another config file use: 
+
+   snakemake -j1 -p --configfile configfilehere.yaml
 
 For the sake reproducibility, use conda to pull same versions of tools. Snakemake and conda have to be installed in your system:
 
