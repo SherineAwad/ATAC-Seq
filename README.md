@@ -34,8 +34,7 @@ For the sake reproducibility, use conda to pull same versions of tools. Snakemak
 
     snakemake --cores --use-conda
 
-Cite US
-######
+### Cite US
 
 If you use this pipeline, please cite this DOI: 10.5281/zenodo.5939988 
 
