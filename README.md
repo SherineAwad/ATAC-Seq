@@ -27,7 +27,7 @@ and to print the commands in a dry run use:
 
 To use another config file use: 
 
-   snakemake -j1 -p --configfile configfilehere.yaml
+    snakemake -j1 -p --configfile configfilehere.yaml
 
 For the sake reproducibility, use conda to pull same versions of tools. Snakemake and conda have to be installed in your system:
 
