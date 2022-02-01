@@ -33,3 +33,9 @@ To use another config file use:
 For the sake reproducibility, use conda to pull same versions of tools. Snakemake and conda have to be installed in your system:
 
     snakemake --cores --use-conda
+
+Cite US
+######
+
+If you use this pipeline, please cite this DOI: 10.5281/zenodo.5939988 
+
