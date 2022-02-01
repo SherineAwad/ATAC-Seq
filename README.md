@@ -15,7 +15,7 @@ Update parameters of Genrich in the config file. Also, change workdir where the 
 
 You can use our Makefile to prepare the references: 
 
-`Prepare Reference <https://github.com/SherineAwad/BulkRNASeq/blob/master/Makefile>`_
+`Prepare Reference <https://github.com/SherineAwad/BulkRNASeq/blob/master/Makefile>`
 
 Then run: snakemake -jnumber_of_cores, for example for 5 cores use:
 
