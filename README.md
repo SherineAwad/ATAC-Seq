@@ -36,5 +36,4 @@ For the sake reproducibility, use conda to pull same versions of tools. Snakemak
 
 ### Cite US
 
-If you use this pipeline, please cite this DOI: 10.5281/zenodo.5939988 
-
+If you use this pipeline, please cite us using this DOI:  "doi:10.5281/zenodo.5939988"
