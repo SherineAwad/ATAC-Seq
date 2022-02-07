@@ -38,4 +38,17 @@ For the sake reproducibility, use conda to pull same versions of tools. Snakemak
 
 If you use this pipeline, please cite us as follows: 
 
-Sherine Awad (2022). SherineAwad/ATAC-Seq: v1.0.0 (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.5939988 
+Sherine Awad (2022). SherineAwad/ATAC-Seq: v1.0.0 (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.5939988
+
+Or for BibTeX use:: 
+
+    @software{sherine_2022_5939988,
+    author       = {Sherine},
+    title        = {SherineAwad/ATAC-Seq: v1.0.0},
+    month        = feb,
+    year         = 2022,
+    publisher    = {Zenodo},
+    version      = {v1.0.0},
+    doi          = {10.5281/zenodo.5939988},
+    url          = {https://doi.org/10.5281/zenodo.5939988}
+    }
