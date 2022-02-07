@@ -34,11 +34,12 @@ For the sake reproducibility, use conda to pull same versions of tools. Snakemak
 
     snakemake --cores --use-conda
 
-### Cite Us
+### Citation
 
 If you use this pipeline, please cite us as follows: 
 
-Sherine Awad (2022). SherineAwad/ATAC-Seq: v1.0.0 (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.5939988
+   
+    Sherine Awad (2022). SherineAwad/ATAC-Seq: v1.0.0 (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.5939988
 
 For BibTeX use:
 
